@@ -2,7 +2,7 @@
 
 Este proyecto es una implementación básica de un sistema de reconocimiento facial utilizando Python y bibliotecas populares como OpenCV y imutils.
 
-![Reconocimiento Facial](imagenes/reconfoto.jpg.jpg)
+![Reconocimiento Facial](imagenes/reconfoto.jpg)
 
 ## Descripción
 
