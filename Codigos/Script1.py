@@ -2,6 +2,8 @@ import cv2
 import os
 import imutils
 from PIL import Image
+import time
+import numpy as np
 
 dataPath = '../Data' 
 
@@ -9,6 +11,7 @@ dataPath = '../Data'
 archivos_videos = os.listdir(dataPath +'/CENTRO EDUCATIVO/')
 
 archivos_mov = [os.path.splitext(archivo)[0] for archivo in archivos_videos if archivo.endswith(".MOV")]
+
 
 for archivo in archivos_mov:
 	
@@ -49,3 +52,61 @@ for archivo in archivos_mov:
 
 	cap.release()
 	cv2.destroyAllWindows()
+
+####ENTRENAMIENTO
+	
+dataPath2 = '../Data/Videos Procesados'
+
+peopleList = os.listdir(dataPath2)
+print('Lista de personas: ', peopleList)
+
+labels = []
+facesData = []
+label = 0
+
+for nameDir in peopleList:
+	personPath = dataPath2 + '/' + nameDir
+	print('Leyendo las imágenes')
+
+	for fileName in os.listdir(personPath):
+		print('Rostros: ', nameDir + '/' + fileName)
+		labels.append(label)
+		facesData.append(cv2.imread(personPath+'/'+fileName,0))
+		image = cv2.imread(personPath+'/'+fileName,0)
+		cv2.imshow('image',image)
+		cv2.waitKey(10)
+	label = label + 1
+
+print('labels= ',labels) #etiquetado
+
+cv2.destroyAllWindows()
+
+#Entrenamiento:
+
+metodos = ['EigenFaces','FisherFace','BPHFace']
+inicio_tiempo = time.time()
+# Métodos:
+# Guardamos el modelo
+for metodo in metodos:
+	if metodo == 'EigenFaces':
+		face_recognizer = cv2.face.EigenFaceRecognizer_create()
+		print("Entrenando...")
+		face_recognizer.train(facesData, np.array(labels))
+		face_recognizer.write('EigenFace.xml')
+		print("Modelo almacenado...")
+	elif metodo == 'FisherFace' :
+		face_recognizer = cv2.face.FisherFaceRecognizer_create()
+		print("Entrenando...")
+		face_recognizer.train(facesData, np.array(labels))
+		face_recognizer.write('FisherFace.xml')
+		print("Modelo almacenado...")
+	elif metodo  == 'BPHFace':
+		face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+		print("Entrenando...")
+		face_recognizer.train(facesData, np.array(labels))
+		face_recognizer.write('BPHFace.xml')
+		print("Modelo almacenado...")
+
+fin_tiempo = time.time()
+tiempo_entrenamiento = fin_tiempo - inicio_tiempo
+print("Tiempo transcurrido:", tiempo_entrenamiento, "segundos")
