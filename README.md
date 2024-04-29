@@ -2,6 +2,8 @@
 
 Este proyecto es una implementación básica de un sistema de reconocimiento facial utilizando Python y bibliotecas populares como OpenCV y imutils.
 
+![Reconocimiento Facial](imagenes/reconfoto.jpg.jpg)
+
 ## Descripción
 
 El reconocimiento facial es una tecnología que identifica o verifica automáticamente a una persona a partir de una imagen digital o un video. En este proyecto, implementaremos un sistema de reconocimiento facial que puede detectar y reconocer rostros pertenecientes a docentes de una institución educativa.
