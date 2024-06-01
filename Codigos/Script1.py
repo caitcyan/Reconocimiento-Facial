@@ -8,7 +8,7 @@ import numpy as np
 dataPath = '../Data' 
 
 # Obtener la lista de archivos en la carpeta de videos
-archivos_videos = os.listdir(dataPath +'/CENTRO EDUCATIVO/')
+archivos_videos = os.listdir(dataPath +'/CENTRO EDUCATIVO/PRE')
 
 archivos_mov = [os.path.splitext(archivo)[0] for archivo in archivos_videos if archivo.endswith(".MOV")]
 
@@ -21,10 +21,11 @@ for archivo in archivos_mov:
 		print('Carpeta creada: ',personPath)
 		os.makedirs(personPath)
 
-	path_video = os.path.join(dataPath, 'CENTRO EDUCATIVO', archivo + '.MOV')
+	path_video = os.path.join(dataPath, 'CENTRO EDUCATIVO/PRE', archivo + '.MOV')
 	cap = cv2.VideoCapture(path_video)
 
-	faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
+	#faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades + 'lbpcascade_frontalface.xml')
+	faceClassif =cv2.CascadeClassifier('lbpcascade_frontalface_improved.xml')
 	count = 0
 
 	while True:
@@ -47,7 +48,7 @@ for archivo in archivos_mov:
 		cv2.imshow('frame',frame)
 
 		k =  cv2.waitKey(1)
-		if k == 27 or count >= 300:
+		if k == 27 or count >= 150:
 			break
 
 	cap.release()
@@ -83,7 +84,8 @@ cv2.destroyAllWindows()
 
 #Entrenamiento:
 
-metodos = ['EigenFaces','FisherFace','BPHFace']
+#metodos = ['EigenFaces','FisherFace','BPHFace']
+metodos = ['FisherFace']
 inicio_tiempo = time.time()
 # Métodos:
 # Guardamos el modelo
