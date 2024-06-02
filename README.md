@@ -25,3 +25,38 @@ Clona este repositorio en tu máquina local:
 
    ```bash
    git clone https://github.com/caitcyan/proyecto-reconocimiento-facial.git
+```
+## Estructura de la Carpeta
+
+- **.git**
+  - Tipo: File folder
+
+- **Codigos**
+  - Tipo: File folder
+
+- **Data**
+  - Tipo: File folder
+
+- **imagenes**
+  - Tipo: File folder
+
+- **.gitignore.txt**
+  - Tipo: Text Document
+  - Tamaño: 1 KB
+
+- **README.md**
+  - Tipo: MD File
+  - Tamaño: 1 KB
+
+## Estructura de la Carpeta Data
+
+- **CENTRO EDUCATIVO**
+  - Tipo: File Folder
+  - PRE
+  - POST
+
+- **INTRUSOS**
+  - Tipo: File Folder
+
+- **Videos Procesados**
+  - Tipo: File Folder
